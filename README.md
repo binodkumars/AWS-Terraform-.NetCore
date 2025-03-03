@@ -111,14 +111,12 @@ Binod Kumar Singh
 
 ---
 
-Here's a GitHub-ready ASP.NET Core project that securely fetches database credentials from AWS Secrets Manager using Terraform.
+##Step by Step Implementation for securely fetches database credentials from AWS Secrets Manager using Terraform.
 
-Step 1: Set Up AWS Secrets Manager with Terraform
+## **Step 1: Set Up AWS Secrets Manager with Terraform**
 Create a Terraform file (aws-secrets.tf):
 
-hcl
-Copy
-Edit
+```hcl
 provider "aws" {
   region = "us-east-1"
 }
@@ -139,28 +137,31 @@ resource "aws_secretsmanager_secret_version" "db_secret_version" {
 output "secret_arn" {
   value = aws_secretsmanager_secret.db_secret.arn
 }
-Deploy the Secret
-sh
-Copy
-Edit
+```
+
+**Deploy the Secret**
+```sh
 terraform init
 terraform apply -auto-approve
-Step 2: Create an ASP.NET Core Project
+```
+
+## **Step 2: Create an ASP.NET Core Project**
+
 Create an ASP.NET Core Web API project:
 
-sh
-Copy
-Edit
+```sh
 dotnet new webapi -n AwsSecretsManagerDemo
 cd AwsSecretsManagerDemo
-Install the AWS SDK package:
+```
 
-sh
-Copy
-Edit
+Install the AWS SDK package:
+```sh
 dotnet add package AWSSDK.SecretsManager
-Step 3: Implement AWS Secrets Manager Integration
-A. Create a Model for DB Credentials
+```
+
+## **Step 3: Implement AWS Secrets Manager Integration**
+
+### **A. Create a Model for DB Credentials**
 Create a new class Models/DbCredentials.cs:
 
 csharp
