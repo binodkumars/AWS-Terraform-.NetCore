@@ -164,9 +164,7 @@ dotnet add package AWSSDK.SecretsManager
 ### **A. Create a Model for DB Credentials**
 Create a new class Models/DbCredentials.cs:
 
-csharp
-Copy
-Edit
+```csharp
 using System.Text.Json.Serialization;
 
 public class DbCredentials
@@ -180,12 +178,12 @@ public class DbCredentials
     [JsonPropertyName("host")]
     public string Host { get; set; }
 }
-B. Create a Service to Fetch Secrets
-Create Services/SecretsManagerService.cs:
+```
 
-csharp
-Copy
-Edit
+### **B. Create a Service to Fetch Secrets**
+
+Create Services/SecretsManagerService.cs:
+```csharp
 using Amazon;
 using Amazon.SecretsManager;
 using Amazon.SecretsManager.Model;
@@ -219,12 +217,11 @@ public class SecretsManagerService
         }
     }
 }
-C. Register the Service in Program.cs
-Modify Program.cs:
+```
+### **C. Register the Service in Program.cs**
 
-csharp
-Copy
-Edit
+Modify Program.cs:
+```csharp
 var builder = WebApplication.CreateBuilder(args);
 
 // Register AWS Secrets Manager Service
@@ -239,12 +236,13 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
-D. Create an API Controller
+```
+
+### **D. Create an API Controller**
+
 Create Controllers/DatabaseController.cs:
 
-csharp
-Copy
-Edit
+```csharp
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -269,35 +267,15 @@ public class DatabaseController : ControllerBase
         return Ok(credentials);
     }
 }
-Step 4: Run and Test the API
+```
+## **Step 4: Run and Test the API**
+
 Run the API:
-
-sh
-Copy
-Edit
+```sh
 dotnet run
+```
+
 Test it using Postman or cURL:
-
-sh
-Copy
-Edit
+```sh
 curl -X GET https://localhost:5001/api/database/credentials
-Step 5: Secure the Application
-Use IAM Roles: Instead of hardcoding AWS credentials, use IAM roles for authentication.
-Restrict Secrets Access: Use AWS IAM policies to limit access to secretsmanager:GetSecretValue.
-Avoid Logging Credentials: Never log sensitive credentials in production.
-GitHub Repository Structure
-pgsql
-Copy
-Edit
-AwsSecretsManagerDemo/
-│── Controllers/
-│   ├── DatabaseController.cs
-│── Models/
-│   ├── DbCredentials.cs
-│── Services/
-│   ├── SecretsManagerService.cs
-│── Program.cs
-│── aws-secrets.tf  (Terraform Configuration)
-│── AwsSecretsManagerDemo.csproj
-
+```
