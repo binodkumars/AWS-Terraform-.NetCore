@@ -111,7 +111,7 @@ Binod Kumar Singh
 
 ---
 
-##Step by Step Implementation for securely fetches database credentials from AWS Secrets Manager using Terraform.
+## Step by Step Implementation for securely fetches database credentials from AWS Secrets Manager using Terraform.
 
 ## **Step 1: Set Up AWS Secrets Manager with Terraform**
 Create a Terraform file (aws-secrets.tf):
